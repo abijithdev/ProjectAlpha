@@ -1,11 +1,12 @@
-import Head from "next/head";
 import "../styles/globals.css";
 export default function Layout({ children }) {
   return (
     <html lang="en">
-      <Head>
-        <title>Next.js</title>
-      </Head>
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Project Alpha</title>
+      </head>
       <body>{children}</body>
     </html>
   );

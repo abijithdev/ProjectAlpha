@@ -5,11 +5,14 @@ import SubmitBtn from "../../../comonents/buttons/submitBtn";
 
 const Login = () => {
   return (
-    <div>
-      <h2 className="text-red-500">Login</h2>
+    <>
+      <main>
+        <h2 className="text-red-500">Login</h2>
+      </main>
+
       <Link href="/register">Registration</Link>
       <SubmitBtn />
-    </div>
+    </>
   );
 };
 
