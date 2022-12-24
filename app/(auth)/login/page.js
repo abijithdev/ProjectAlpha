@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import SubmitBtn from "../../../comonents/buttons/submitBtn";
+import SubmitBtn from "../../../components/buttons/submitBtn";
 
 const Login = () => {
   return (
