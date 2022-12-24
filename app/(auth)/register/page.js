@@ -4,7 +4,7 @@ import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import InputField from "../../../comonents/forms/inputField";
+import InputField from "../../../components/forms/inputField";
 
 const Register = () => {
   const registerationSchema = z
