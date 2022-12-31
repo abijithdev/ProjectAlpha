@@ -1,10 +1,15 @@
-import React, { useState } from 'react'
+import React from "react";
+const SubmitBtn = ({
+  submitFn = () => {},
+  btnName = "Submit",
+  className = "",
+}) => {
+  //  const { className = "", btnName = "submit", ...restProps } = props;
+  return (
+    <button className={`${className}`} onClick={submitFn} type="submit">
+      {btnName}
+    </button>
+  );
+};
 
-const SubmitBtn = () => {
-    const [state, setstate] = useState("")
-    return (
-        <button>SubmitBtn</button>
-    )
-}
-
-export default SubmitBtn
+export default SubmitBtn;

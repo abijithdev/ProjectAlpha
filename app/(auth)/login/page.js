@@ -8,10 +8,12 @@ const Login = () => {
     <>
       <main>
         <h2 className="text-red-500">Login</h2>
+        <form>
+          <SubmitBtn btnName="LOGIN" />
+        </form>
       </main>
 
-      <Link href="/register">Registration</Link>
-      <SubmitBtn />
+      <Link href="/signup">SIGN UP</Link>
     </>
   );
 };
