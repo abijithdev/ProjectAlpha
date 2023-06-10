@@ -7,47 +7,58 @@ import { useForm } from "react-hook-form";
 import InputField from "../../../components/forms/inputField";
 import { countryCodeListData } from "../../../components/forms/countryCodeList";
 import SubmitBtn from "../../../components/buttons/submitBtn";
-
+import {
+  mobileRegex,
+  nameRegex,
+  passwordRegex,
+} from "../../../components/forms/formHelperData";
+import PasswordField from "../../../components/forms/passwordField";
 const SignUp = () => {
   const [ouputData, setOuputData] = useState({});
-  const signupSchema = z
-    .object({
-      firstName: z.string().min(1, { message: "Firstname is required" }),
-      middleName: z.string({
+  const signupSchema = z.object({
+    firstName: z
+      .string()
+      .min(1, { message: "Firstname is required" })
+      .regex(nameRegex, {
+        message: "Enter a valid Name",
+      }),
+    middleName: z
+      .string({
         required_error: "Name is required",
         invalid_type_error: "Name must be a string",
+      })
+      .regex(nameRegex, {
+        message: "Enter a valid Name",
+      })
+      .optional()
+      .nullish(),
+    lastName: z
+      .string()
+      .min(1, { message: "Lastname is required" })
+      .regex(nameRegex, {
+        message: "Enter a valid Name",
       }),
-      lastName: z.string().min(1, { message: "Lastname is required" }),
-      lastName: z.string().min(1, { message: "Lastname is required" }),
-      email: z
-        .string()
-        .min(1, { message: "Required" })
-        .email({
-          message: "Must be a valid email",
-        })
-        .optional(),
-      country: z
-        .object({
-          countryName: z.string(),
-          dailCode: z.string(),
-        })
-        .optional(),
-      phoneNumber: z
-        .number()
-        .min(5, { message: "Enter a valid number" })
-        .max(8, { message: "Enter a valid number" }),
-      password: z
-        .string()
-        .min(6, { message: "Password must be atleast 6 characters" }),
-      confirmPassword: z
-        .string()
-        .min(1, { message: "Confirm Password is required" }),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-      path: ["confirmPassword"],
-      message: "Password don't match",
-    });
-
+    email: z
+      .string()
+      .min(1, { message: "Required" })
+      .email({
+        message: "Must be a valid email",
+      })
+      .optional(),
+    country: z
+      .object({
+        countryName: z.string(),
+        dailCode: z.string(),
+      })
+      .optional(),
+    // phoneNumber: z.number().regex(mobileRegex, {
+    //   message: "Enter a valid Number",
+    // }),
+    password: z.string().regex(passwordRegex, {
+      message:
+        "Password must be at least 8 characters and contain 1 lowercase letter, 1 uppercase letter, 1 number, and 1 special character",
+    }),
+  });
   const {
     reset,
     register,
@@ -62,9 +73,9 @@ const SignUp = () => {
   };
   return (
     <div>
-      <h2>Sign Up</h2>
+      <h1 className="">Sign Up</h1>
       <form
-        className="flex-col flex container"
+        className="flex-col mx-4 sm:mx-auto flex max-w-xl "
         onSubmit={handleSubmit(onRegisterSubmit)}
       >
         <InputField
@@ -95,7 +106,7 @@ const SignUp = () => {
           errors={errors}
           placeHolder="Enter your email"
         />
-        {/* <label htmlFor="country">Country</label>
+        <label htmlFor="country">Country</label>
         <select {...register("country")} id="country">
           {countryCodeListData.map((item) => {
             return (
@@ -110,24 +121,19 @@ const SignUp = () => {
               </option>
             );
           })}
-        </select> */}
+        </select>
         <InputField
           fieldName="phoneNumber"
           register={register}
           errors={errors}
           placeHolder="Enter your mobile number"
         />
-        <InputField
+        <PasswordField
           fieldName="password"
-          register={register}
           errors={errors}
-          placeHolder="Enter your password"
-        />
-        <InputField
-          fieldName="confirmPassword"
           register={register}
-          errors={errors}
           placeHolder="Enter your password"
+          title="Password"
         />
         <div className="mt-5">
           {Object.entries(ouputData).map(([key, value]) => {
