@@ -154,5 +154,5 @@ const SignUp = () => {
     </div>
   );
 };
-
+/*delete this comment*/
 export default SignUp;
